@@ -1,13 +1,17 @@
+/*
+Student Editor: m1221
+Date: 08/18/2015
+Purpose of code: This code was edited to add functionality to a game file
+provided by Udacity.
+
+*/
+
 'use strict';
-// Enemies our player must avoid
+// Player must avoid enemies
 var Enemy = function(x, y, speed) {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
-  this.sprite = 'images/enemy-bug.png';
-  this.x = x;
-  this.y = y;
+  this.sprite = 'images/enemy-bug.png'; // image of enemy
+  this.x = x; // x position on canvas of enemy
+  this.y = y; // y position on canvas of enemy
   // Enemies will be instantiated with different speeds
   // Speeds are adjusted depending on player score
   this.speed = speed;
@@ -29,13 +33,11 @@ Enemy.prototype.update = function(dt) {
   // Collision detection.
   if ((player.x < this.x + 35 && player.x > this.x - 35) &&
   (player.y < this.y + 30 && player.y > this.y - 50)){
-    // Decrement player score if it is greater than 0
-    // Adjust enemy speed if player score is greater than 0
-    if (player.score > 0){
-      player.score--;
-      document.getElementById('score').textContent= player.score.toString();
+    if (player.score > 0){ // If player score is greater than 0:
+      player.score--; // Decrement player score
+      document.getElementById('score').textContent = player.score.toString();
       allEnemies.forEach(function(enemy){
-      enemy.speed = enemy.speed - 0.1;
+      enemy.speed = enemy.speed - 0.1; // Adjust enemy speed if player score
       });
     }
     // Reset player position to starting position
@@ -44,14 +46,12 @@ Enemy.prototype.update = function(dt) {
   }
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// User must control player and guide him safely to water
 var Player = function() {
   this.startingPosition = [252, 400];
   this.sprite = 'images/char-boy.png';
@@ -60,13 +60,14 @@ var Player = function() {
   this.score = 0;
 };
 
+// Draw player on screen
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(keyMark) {
-  // If player reaches water reset position, add increment score,
-  // increase enemy speed
+  // If player reaches water then reset position, increment score,
+  // and increase enemy speed
   if (this.y < 30){
     this.x = this.startingPosition[0];
     this.y = this.startingPosition[1];
@@ -92,15 +93,11 @@ Player.prototype.handleInput = function(keyMark) {
   }
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Instantiate objects for player and enemies
 var player = new Player();
 var allEnemies = [new Enemy(-50, 50, 1.3), new Enemy(-200, 50, 1.3), new Enemy(-375, 50, 1.3),
 new Enemy(-50, 140, 0.8), new Enemy(-300, 140, 0.8), new Enemy(-425, 140, 0.8),
 new Enemy(300, 225, 1), new Enemy(100, 225, 1), new Enemy(-100, 225, 1)];
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
