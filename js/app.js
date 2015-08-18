@@ -60,10 +60,6 @@ var Player = function() {
   this.score = 0;
 };
 
-Player.prototype.update = function() {
-  // can't think of anything that should go here
-};
-
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -99,8 +95,8 @@ Player.prototype.handleInput = function(keyMark) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-player = new Player();
-allEnemies = [new Enemy(-50, 50, 1.3), new Enemy(-200, 50, 1.3), new Enemy(-375, 50, 1.3),
+var player = new Player();
+var allEnemies = [new Enemy(-50, 50, 1.3), new Enemy(-200, 50, 1.3), new Enemy(-375, 50, 1.3),
 new Enemy(-50, 140, 0.8), new Enemy(-300, 140, 0.8), new Enemy(-425, 140, 0.8),
 new Enemy(300, 225, 1), new Enemy(100, 225, 1), new Enemy(-100, 225, 1)];
 
